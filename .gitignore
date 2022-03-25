@@ -1,0 +1,11 @@
+# created by virtualenv automatically
+tmp/
+output/
+drivers/
+Scripts/
+output/backups/
+Lib/
+pages/
+geckodriver*
+.idea/
+pyvenv.cfg
