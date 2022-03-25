@@ -8,7 +8,16 @@ import time
 
 str1 = '5,6,7/1100 Sydney Road, Fawkner'
 
-val1 = os.path.basename('../output/buy_main.csv')
-val2 = '.csv'+str(int(time.time()))
-print(val1)
-print(val2)
+val1 = 'E:/Coding/real_estate_tracker/pages/buy/glenroy1-processed.htm'
+num = 1648167365.4417772
+
+my_time = time.strftime('%Y-%m-%d', time.localtime(num))
+
+ret1 = os.path.getatime(val1)
+ret2 = os.path.getmtime(val1)
+ret3 = os.path.getctime(val1)
+
+print(my_time)
+
+
+

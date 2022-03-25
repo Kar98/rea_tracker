@@ -10,12 +10,11 @@ from datetime import date
 
 class ReaParser:
     article_regexp = '<article(.*?)</article>'
-    audit_path = '../output/audit.txt'
 
     def __init__(self):
         self.articles = []
         self.audit = None
-        self.date = date.today().strftime('%d/%m/%Y')
+        self.date = ''
 
     def parse_page(self, path):
         """Parses saved html into list of articles"""
@@ -24,6 +23,13 @@ class ReaParser:
 
         if content == '':
             raise RuntimeError('File not found')
+
+        try:
+            file_time2 = int(os.path.getmtime(path))
+            self.date = time.strftime('%Y-%m-%d', time.localtime(file_time2))
+        except OSError:
+            self.date = ''
+            print('Could not get file date metadata')
 
         matches = re.findall('<article(.*?)</article>', content)
         for match in matches:
@@ -42,7 +48,8 @@ class ReaParser:
             for line in lines:
                 if 'Address|Suburb' not in line:
                     splits = line.split('|')
-                    self.articles.append(Article(splits[0], splits[1], splits[2], splits[3], splits[4], splits[5], splits[6].replace('\n','')))
+                    self.articles.append(Article(splits[0], splits[1], splits[2], splits[3], splits[4], splits[5],
+                                                 splits[6].replace('\n',''), splits[7].replace('\n', '')))
         if load_audit_file != '':
             self.set_audit(load_audit_file)
         return self.articles
@@ -54,7 +61,7 @@ class ReaParser:
 
     def merge(self, parser_to_merge):
         if self.audit is None:
-            raise RuntimeError('No audit record set during merge')
+            raise RuntimeError('No audit record set for the main ReaParser object')
         for merge_article in parser_to_merge.articles:
             found = False
             for main_article in self.articles:
@@ -68,10 +75,14 @@ class ReaParser:
                         print(f'Old price {main_article.price} . New price {merge_article.price}')
                         if check_record is not None:
                             # Edit
-                            self.__edit_audit(key_name, merge_article.price)
+                            self.__edit_audit(key_name, merge_article.price, merge_article.date_updated)
+                            # Set last updated in main
+                            idx = self.articles.index(main_article)
+                            self.articles[idx].date_updated = merge_article.date_updated
                         else:
                             # Append
-                            self.audit.append({'Address': key_name, 'Prices': [main_article.price , merge_article.price]})
+                            self.audit.append({'Address': key_name, 'Prices': [{"Price": main_article.price, "Date": main_article.date_updated},
+                                                                               {"Price": merge_article.price, "Date": merge_article.date_updated}]})
             if not found:
                 print(f'New listing : {merge_article.address},{merge_article.suburb}')
                 self.articles.append(merge_article)
@@ -82,10 +93,10 @@ class ReaParser:
                 return a
         return None
 
-    def __edit_audit(self, name, price):
+    def __edit_audit(self, name, price, date):
         for a in self.audit:
             if a['Address'] == name:
-                a['Prices'].append(price)
+                a['Prices'].append({"Price": price, "Date": date})
 
     def __edit_article(self, existing_article, new_article):
         found_article = None
@@ -118,8 +129,9 @@ class Article:
             self.bathrooms = args[4]
             self.landsize = args[5]
             self.auction = args[6]
-            self.date_updated = date.today().strftime('%d/%m/%Y')
+            self.date_updated = args[7]
         except IndexError:
+            # print('Error parsing - ' + self.address)
             self.address = ''
             self.suburb = ''
             self.price = ''
@@ -127,7 +139,7 @@ class Article:
             self.bathrooms = ''
             self.landsize = ''
             self.auction = ''
-            self.date_update = ''
+            self.date_updated = ''
 
     def __str__(self):
         return f' {self.address} {self.price} {self.bedrooms}/{self.bathrooms} . Size: {self.landsize} Auction: {self.auction}'
@@ -137,10 +149,10 @@ class Article:
 
     def parse_article(self, content):
         x_address = 'card__details-link"><span class="">(.*?)<'
-        x_agent = 'agent__name.*>(.*?)<'
+        # x_agent = 'agent__name.*>(.*?)<'
         x_price = 'property-price ">(.*?)<'
-        x_bedrooms = 'general-features__beds">.*?(\d+?)<'
-        x_bathrooms = 'general-features__baths">.*?(\d+?)<'
+        x_bedrooms = 'general-features__beds">.*?(\\d+?)<'
+        x_bathrooms = 'general-features__baths">.*?(\\d+?)<'
         x_landsize = 'property-size__land.*?(\d+)<?'
         x_auction = 'AuctionDetails.*<span role="text">(.*?)<'
 
@@ -152,12 +164,13 @@ class Article:
         else:
             self.address = full_address.split(',')[0]
             self.suburb = full_address.split(',')[1].strip()
-        self.agent = self.__get_value(content, x_agent)
+        # self.agent = self.__get_value(content, x_agent)
         self.price = self.__get_value(content, x_price)
         self.bedrooms = self.__get_value(content, x_bedrooms)
         self.bathrooms = self.__get_value(content, x_bathrooms)
         self.landsize = self.__get_value(content, x_landsize)
         self.auction = self.__get_value(content, x_auction)
+        self.date_updated = self.date_updated = date.today().strftime('%d/%m/%Y')
 
         return self
 
@@ -180,13 +193,14 @@ class Article:
 
 def backup_file(file_path):
     filename = os.path.basename(file_path)
-    if not os.path.exists(f'{file_path}/backups'):
-        os.makedirs(f'{file_path}/backups')
+    filedir = os.path.dirname(file_path)
+    if not os.path.exists(f'{filedir}/backups'):
+        os.makedirs(f'{filedir}/backups')
     # If main has been created, then create backup
     if os.path.exists(file_path):
-        original_backup_filepath = f'{file_path}/backups/{filename}'
+        original_backup_filepath = f'{filedir}/backups/{filename}'
         if os.path.exists(original_backup_filepath):
-            os.rename(original_backup_filepath, original_backup_filepath.replace('.csv','-'+str(int(time.now()))+'.csv'))
+            os.rename(original_backup_filepath, original_backup_filepath.replace('.csv','-'+str(int(time.time()))+'.csv'))
             shutil.copy(file_path, original_backup_filepath)
 
     # Replace with new one

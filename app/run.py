@@ -16,7 +16,7 @@ new_page = ReaParser()
 # Backup pages:
 backup_file(buy_main)
 backup_file(audit)
-# test
+
 
 # If existing file exists, read in and store
 try:
@@ -35,12 +35,12 @@ if main_record is None:
         main_record.parse_page(starter_file)
         with open(buy_main, 'w', newline='') as csvfile:
             rea_writer = csv.writer(csvfile, delimiter='|')
-            rea_writer.writerow(['Address', 'Suburb', 'Price', 'Bedrooms', 'Bathrooms', 'Size', 'Auction'])
+            rea_writer.writerow(['Address', 'Suburb', 'Price', 'Bedrooms', 'Bathrooms', 'Size', 'Auction', 'Date updated'])
             for article in main_record.articles:
                 rea_writer.writerow(article.to_csv())
-        with open(ReaParser.audit_path, 'w', newline='') as auditfile:
+        with open(audit, 'w', newline='') as auditfile:
             auditfile.write('[]')
-        main_record.set_audit(ReaParser.audit_path)
+        main_record.set_audit(audit)
         os.rename(starter_file, starter_file.replace('.htm', '-processed.htm'))
     else:
         print('No files to process')
@@ -61,18 +61,20 @@ for file in to_be_processed:
     file_path = buy_pages+file
     new_file = ReaParser()
     new_file.parse_page(file_path)
+    if len(new_file.articles) == 0:
+        print('No articles from the file ' + file_path)
     main_record.merge(new_file)
     os.rename(file_path, file_path.replace('.htm', '-processed.htm'))
 
 with open(buy_main, 'w', newline='') as csvfile:
     rea_writer = csv.writer(csvfile, delimiter='|')
-    rea_writer.writerow(['Address','Suburb','Price','Bedrooms','Bathrooms','Size', 'Auction'])
+    rea_writer.writerow(['Address', 'Suburb',  'Price', 'Bedrooms', 'Bathrooms', 'Size', 'Auction', 'Date updated'])
     for article in main_record.articles:
         value = article.to_csv()
         rea_writer.writerow(value)
 with open(audit, 'w', newline='') as jsonaudit:
     rea_writer = csv.writer(csvfile, delimiter='|')
-    json_content = json.dumps(main_record.audit, sort_keys=True)
+    json_content = json.dumps(main_record.audit, sort_keys=True, indent=2)
     jsonaudit.write(json_content)
 
 
