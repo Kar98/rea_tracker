@@ -1,11 +1,16 @@
 # created by virtualenv automatically
 tmp/
-output/
 drivers/
 Scripts/
-output/backups/
+output/backups/*
+output/*.txt
+output/*.csv
 Lib/
-pages/
+pages/buy/*
+pages/sold/*
 geckodriver*
 .idea/
 pyvenv.cfg
+node_modules/
+test-results/
+playwright-report/

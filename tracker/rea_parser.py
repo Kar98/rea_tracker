@@ -1,12 +1,10 @@
 import re
-import csv
-import glob
-import sys
 import json
 import os
 import time
 import shutil
 from datetime import date
+
 
 class ReaParser:
     article_regexp = '<article(.*?)</article>'
@@ -26,16 +24,17 @@ class ReaParser:
 
         try:
             file_time2 = int(os.path.getmtime(path))
-            self.date = time.strftime('%Y-%m-%d', time.localtime(file_time2))
+            self.date = time.strftime('%d/%m/%Y', time.localtime(file_time2))
         except OSError:
             self.date = ''
             print('Could not get file date metadata')
 
         matches = re.findall('<article(.*?)</article>', content)
         for match in matches:
+            # Filter out the rubbish mini ads that RE put in between the main cards.
             if 'Card__Box' in match and 'residential-card' in match:
                 try:
-                    self.articles.append(Article().parse_article(match))
+                    self.articles.append(Article().parse_article(match, self.date))
                 except IndexError:
                     print('Error parsing article.')
                     print(match)
@@ -76,13 +75,13 @@ class ReaParser:
                         if check_record is not None:
                             # Edit
                             self.__edit_audit(key_name, merge_article.price, merge_article.date_updated)
-                            # Set last updated in main
-                            idx = self.articles.index(main_article)
-                            self.articles[idx].date_updated = merge_article.date_updated
+                            # Update the main record
+                            self.__edit_article(main_article, merge_article)
                         else:
                             # Append
                             self.audit.append({'Address': key_name, 'Prices': [{"Price": main_article.price, "Date": main_article.date_updated},
                                                                                {"Price": merge_article.price, "Date": merge_article.date_updated}]})
+                            self.__edit_article(main_article, merge_article)
             if not found:
                 print(f'New listing : {merge_article.address},{merge_article.suburb}')
                 self.articles.append(merge_article)
@@ -93,21 +92,16 @@ class ReaParser:
                 return a
         return None
 
-    def __edit_audit(self, name, price, date):
+    def __edit_audit(self, name, price, audit_date):
         for a in self.audit:
             if a['Address'] == name:
-                a['Prices'].append({"Price": price, "Date": date})
+                a['Prices'].append({"Price": price, "Date": audit_date})
 
-    def __edit_article(self, existing_article, new_article):
-        found_article = None
-        for article in self.articles:
-            if article.address == existing_article.address and article.suburb == existing_article.suburb:
-                found_article = article
-                break
-        self.articles.remove(found_article)
-        self.articles.append(new_article)
-        if found_article == None:
-            raise RuntimeError(f'No article found for {existing_article.address},{existing_article.suburb}')
+    def __edit_article(self, main_article, new_article):
+        idx = self.articles.index(main_article)
+        self.articles[idx].auction = new_article.auction
+        self.articles[idx].price = new_article.price
+        self.articles[idx].date_updated = new_article.date_updated
 
     @staticmethod
     def get_files_in_dir(folder):
@@ -147,13 +141,13 @@ class Article:
     def to_csv(self):
         return [self.address,self.suburb, self.price,self.bedrooms,self.bathrooms,self.landsize,self.auction,self.date_updated]
 
-    def parse_article(self, content):
+    def parse_article(self, content, date_updated=''):
         x_address = 'card__details-link"><span class="">(.*?)<'
         # x_agent = 'agent__name.*>(.*?)<'
         x_price = 'property-price ">(.*?)<'
         x_bedrooms = 'general-features__beds">.*?(\\d+?)<'
         x_bathrooms = 'general-features__baths">.*?(\\d+?)<'
-        x_landsize = 'property-size__land.*?(\d+)<?'
+        x_landsize = 'property-size__land.*?(\\d+)<?'
         x_auction = 'AuctionDetails.*<span role="text">(.*?)<'
 
         full_address = self.__get_value(content, x_address)
@@ -170,7 +164,10 @@ class Article:
         self.bathrooms = self.__get_value(content, x_bathrooms)
         self.landsize = self.__get_value(content, x_landsize)
         self.auction = self.__get_value(content, x_auction)
-        self.date_updated = self.date_updated = date.today().strftime('%d/%m/%Y')
+        if date_updated == '':
+            self.date_updated = self.date_updated = date.today().strftime('%d/%m/%Y')
+        else:
+            self.date_updated = date_updated
 
         return self
 
@@ -200,7 +197,10 @@ def backup_file(file_path):
     if os.path.exists(file_path):
         original_backup_filepath = f'{filedir}/backups/{filename}'
         if os.path.exists(original_backup_filepath):
-            os.rename(original_backup_filepath, original_backup_filepath.replace('.csv','-'+str(int(time.time()))+'.csv'))
+            if '.csv' in original_backup_filepath:
+                os.rename(original_backup_filepath, original_backup_filepath.replace('.csv','-'+str(int(time.time()))+'.csv'))
+            elif '.txt' in original_backup_filepath:
+                os.rename(original_backup_filepath, original_backup_filepath.replace('.txt', '-' + str(int(time.time())) + '.txt'))
             shutil.copy(file_path, original_backup_filepath)
 
     # Replace with new one

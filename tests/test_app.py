@@ -10,14 +10,22 @@ def get_files_in_dir(folder):
         tmplist.append(f)
     return tmplist
 
-
-@unittest.skip("Debug functions")
+@unittest.skip('Debug')
 class TestAppUtilFunctions(unittest.TestCase):
     def test_reset_files(self):
         folder_path = '../pages/buy/'
         files = get_files_in_dir(folder_path)
         for f in files:
             if '-processed.htm' in f:
+                os.rename(folder_path+f, folder_path+f.replace('-processed.htm', '.htm'))
+        assert(True)
+
+    def test_reset_files_byname(self):
+        name = 'glenroy'
+        folder_path = '../pages/buy/'
+        files = get_files_in_dir(folder_path)
+        for f in files:
+            if '-processed.htm' in f and name in f:
                 os.rename(folder_path+f, folder_path+f.replace('-processed.htm', '.htm'))
         assert(True)
 
