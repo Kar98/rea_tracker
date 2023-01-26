@@ -14,7 +14,7 @@ class ReaParser:
         self.audit = None
         self.date = ''
 
-    def parse_page(self, path):
+    def parse_buy_page(self, path):
         """Parses saved html into list of articles"""
         with open(path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -105,6 +105,9 @@ class ReaParser:
 
     @staticmethod
     def get_files_in_dir(folder):
+        """
+        Returns a list of files from the provided directory. It will exclude any docs that have processed in their name
+        """
         files = os.listdir(folder)
         tmplist = []
         for f in files:
@@ -124,8 +127,11 @@ class Article:
             self.landsize = args[5]
             self.auction = args[6]
             self.date_updated = args[7]
+            self.agent = ''
+            self.agency = ''
+            self.sold_on = ''  # Set through  parse_sold_article
         except IndexError:
-            # print('Error parsing - ' + self.address)
+            print('Could not parse article')
             self.address = ''
             self.suburb = ''
             self.price = ''
@@ -134,6 +140,9 @@ class Article:
             self.landsize = ''
             self.auction = ''
             self.date_updated = ''
+            self.agent = ''
+            self.agency = ''
+            self.sold_on = ''
 
     def __str__(self):
         return f' {self.address} {self.price} {self.bedrooms}/{self.bathrooms} . Size: {self.landsize} Auction: {self.auction}'
@@ -143,14 +152,18 @@ class Article:
 
     def parse_article(self, content, date_updated=''):
         x_address = 'card__details-link"><span class="">(.*?)<'
-        # x_agent = 'agent__name.*>(.*?)<'
+        x_agent = 'agent__name.*>(.*?)<'
+        x_agency = 'branding__image" alt="(.*?)<'
         x_price = 'property-price ">(.*?)<'
         x_bedrooms = 'general-features__beds">.*?(\\d+?)<'
         x_bathrooms = 'general-features__baths">.*?(\\d+?)<'
         x_landsize = 'property-size__land.*?(\\d+)<?'
         x_auction = 'AuctionDetails.*<span role="text">(.*?)<'
+        x_sold_on = 'Sold on (.*?)<'
 
         full_address = self.__get_value(content, x_address)
+        self.agent = self.__get_value(content, x_agent)
+        self.angecy = self.__get_value(content, x_agency)
         if full_address.count(',') > 1:
             tmp1, tmp2 = self.__split_multi_comma(full_address)
             self.address = tmp1
@@ -168,6 +181,9 @@ class Article:
             self.date_updated = self.date_updated = date.today().strftime('%d/%m/%Y')
         else:
             self.date_updated = date_updated
+
+        # Only applicable for sold pages:
+        self.sold_on = self.__get_value(content, x_sold_on)
 
         return self
 

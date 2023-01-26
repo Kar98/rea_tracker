@@ -6,13 +6,12 @@ output/backups/*
 output/*.txt
 output/*.csv
 Lib/
-pages/buy/*
+pages/buy/*.htm
+pages/buy/*.html
+pages/buy/processed/*
 pages/sold/*
 geckodriver*
 .idea/
 pyvenv.cfg
-node_modules/
-test-results/
-playwright-report/
 
 __pycache__
