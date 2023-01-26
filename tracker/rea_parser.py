@@ -29,6 +29,8 @@ class ReaParser:
             self.date = ''
             print('Could not get file date metadata')
 
+        if('27 Tarana Avenue' in content):
+            print('')
         matches = re.findall('<article(.*?)</article>', content)
         for match in matches:
             # Filter out the rubbish mini ads that RE put in between the main cards.
@@ -46,9 +48,12 @@ class ReaParser:
             lines = f.readlines()
             for line in lines:
                 if 'Address|Suburb' not in line:
+                    line = line.replace('\n','')
                     splits = line.split('|')
-                    self.articles.append(Article(splits[0], splits[1], splits[2], splits[3], splits[4], splits[5],
-                                                 splits[6].replace('\n',''), splits[7].replace('\n', '')))
+                    a = Article(*splits)
+                    self.articles.append(a)
+                    #self.articles.append(Article(splits[0], splits[1], splits[2], splits[3], splits[4], splits[5],splits[6].replace('\n',''), splits[7].replace('\n', ''),splits[8],splits[9]))
+            
         if load_audit_file != '':
             self.set_audit(load_audit_file)
         return self.articles
@@ -85,6 +90,13 @@ class ReaParser:
             if not found:
                 print(f'New listing : {merge_article.address},{merge_article.suburb}')
                 self.articles.append(merge_article)
+    
+    def add_agent_details(self, parser_to_merge):
+        for merge_article in parser_to_merge.articles:
+            for main_article in self.articles:
+                if main_article.address == merge_article.address and main_article.suburb == merge_article.suburb:
+                    main_article.agent = merge_article.agent
+                    main_article.agency = merge_article.agency
 
     def __is_audit(self, name):
         for a in self.audit:
@@ -111,12 +123,23 @@ class ReaParser:
         files = os.listdir(folder)
         tmplist = []
         for f in files:
-            if 'processed' not in f:
-                tmplist.append(f)
+            if f != 'processed':
+                tmplist.append(f) 
         return tmplist
 
 
 class Article:
+    address = ''
+    suburb = ''
+    price = ''
+    bedrooms = ''
+    bathrooms = ''
+    landsize = ''
+    auction = ''
+    date_updated = ''
+    agent = ''
+    agency = ''
+    sold_on = ''
     def __init__(self, *args):
         try:
             self.address = args[0]
@@ -127,43 +150,32 @@ class Article:
             self.landsize = args[5]
             self.auction = args[6]
             self.date_updated = args[7]
-            self.agent = ''
-            self.agency = ''
+            self.agent = args[8]
+            self.agency = args[9]
             self.sold_on = ''  # Set through  parse_sold_article
         except IndexError:
-            print('Could not parse article')
-            self.address = ''
-            self.suburb = ''
-            self.price = ''
-            self.bedrooms = ''
-            self.bathrooms = ''
-            self.landsize = ''
-            self.auction = ''
-            self.date_updated = ''
-            self.agent = ''
-            self.agency = ''
-            self.sold_on = ''
+            pass
+            #print('Could not finish parsing article')
 
     def __str__(self):
         return f' {self.address} {self.price} {self.bedrooms}/{self.bathrooms} . Size: {self.landsize} Auction: {self.auction}'
 
     def to_csv(self):
-        return [self.address,self.suburb, self.price,self.bedrooms,self.bathrooms,self.landsize,self.auction,self.date_updated]
+        return [self.address,self.suburb, self.price,self.bedrooms,self.bathrooms,self.landsize,self.auction,self.date_updated,self.agent,self.agency]
 
     def parse_article(self, content, date_updated=''):
+        
         x_address = 'card__details-link"><span class="">(.*?)<'
-        x_agent = 'agent__name.*>(.*?)<'
-        x_agency = 'branding__image" alt="(.*?)<'
+        x_agent = 'agent__name.*?>(.*?)<'
+        x_agency = 'branding__image" alt="(.*?)"'
         x_price = 'property-price ">(.*?)<'
         x_bedrooms = 'general-features__beds">.*?(\\d+?)<'
         x_bathrooms = 'general-features__baths">.*?(\\d+?)<'
         x_landsize = 'property-size__land.*?(\\d+)<?'
         x_auction = 'AuctionDetails.*<span role="text">(.*?)<'
         x_sold_on = 'Sold on (.*?)<'
-
         full_address = self.__get_value(content, x_address)
-        self.agent = self.__get_value(content, x_agent)
-        self.angecy = self.__get_value(content, x_agency)
+        
         if full_address.count(',') > 1:
             tmp1, tmp2 = self.__split_multi_comma(full_address)
             self.address = tmp1
@@ -178,9 +190,11 @@ class Article:
         self.landsize = self.__get_value(content, x_landsize)
         self.auction = self.__get_value(content, x_auction)
         if date_updated == '':
-            self.date_updated = self.date_updated = date.today().strftime('%d/%m/%Y')
+            self.date_updated = date.today().strftime('%d/%m/%Y')
         else:
             self.date_updated = date_updated
+        self.agent = self.__get_value(content, x_agent).replace('\n','')
+        self.agency = self.__get_value(content, x_agency).replace('\n','')
 
         # Only applicable for sold pages:
         self.sold_on = self.__get_value(content, x_sold_on)
@@ -199,7 +213,9 @@ class Article:
 
     def __get_value(self, content, regexp):
         try:
-            return re.search(regexp, content).group(1).replace('|', '')
+            value = re.search(regexp, content).group(1).replace('|', '')
+            value = value.replace('&amp;','&')
+            return value
         except AttributeError:
             return ''
 

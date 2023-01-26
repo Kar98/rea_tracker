@@ -32,6 +32,7 @@ backup_file(buy_audit)
 try:
     main_buy_record.get_from_csv(buy_main, buy_audit)
 except FileNotFoundError:
+    print('Could not find main buy record')
     main_buy_record = None
 
 # Check if main exists. If not then do init.
@@ -46,7 +47,7 @@ if main_buy_record is None:
         main_buy_record.parse_buy_page(starter_file)
         with open(buy_main, 'w', newline='') as csvfile:
             rea_writer = csv.writer(csvfile, delimiter='|')
-            rea_writer.writerow(['Address', 'Suburb', 'Price', 'Bedrooms', 'Bathrooms', 'Size', 'Auction', 'Date updated'])
+            rea_writer.writerow(['Address', 'Suburb', 'Price', 'Bedrooms', 'Bathrooms', 'Size', 'Auction', 'Date updated', 'Agent', 'Agency'])
             for article in main_buy_record.articles:
                 rea_writer.writerow(article.to_csv())
         with open(buy_audit, 'w', newline='') as auditfile:
@@ -66,6 +67,24 @@ to_be_processed = ReaParser.get_files_in_dir(buy_pages)
 print('Files to process:')
 print(to_be_processed)
 
+#strathmore = 'D:/Coding/real_estate_tracker/pages/buy/processed/strathmore1-processed.htm'
+#strathmorefile = ReaParser()
+#strathmorefile.parse_buy_page(strathmore)
+
+# Load in agent info backdated.
+
+#procs = 'D:/Coding/real_estate_tracker/pages/buy/processed/'
+#agent_details = ReaParser.get_files_in_dir(procs)
+#for agent_file in agent_details:
+#    file_path = procs+agent_file
+#    new_file = ReaParser()
+#    with open(file_path, 'r', encoding='utf-8') as f:
+#        content = f.read()
+#        if '89 John Street' in content :
+#            print('89 John Street')
+#    new_file.parse_buy_page(file_path)
+#    main_buy_record.add_agent_details(new_file)
+
 # Compare new file against old records and see if there is a change. Set file to processed afterwards.
 for file in to_be_processed:
     print('Processing file')
@@ -79,9 +98,10 @@ for file in to_be_processed:
 
     shutil.move(file_path, os.path.join(buy_pages, 'processed', file.replace('.htm', '-'+str(time.mktime(datetime.now().timetuple()))+'.htm')))
 
+
 with open(buy_main, 'w', newline='') as csvfile:
     rea_writer = csv.writer(csvfile, delimiter='|')
-    rea_writer.writerow(['Address', 'Suburb',  'Price', 'Bedrooms', 'Bathrooms', 'Size', 'Auction', 'Date updated'])
+    rea_writer.writerow(['Address', 'Suburb',  'Price', 'Bedrooms', 'Bathrooms', 'Size', 'Auction', 'Date updated', 'Agent', 'Agency'])
     for article in main_buy_record.articles:
         value = article.to_csv()
         rea_writer.writerow(value)
