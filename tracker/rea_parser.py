@@ -52,7 +52,6 @@ class ReaParser:
                     splits = line.split('|')
                     a = Article(*splits)
                     self.articles.append(a)
-                    #self.articles.append(Article(splits[0], splits[1], splits[2], splits[3], splits[4], splits[5],splits[6].replace('\n',''), splits[7].replace('\n', ''),splits[8],splits[9]))
             
         if load_audit_file != '':
             self.set_audit(load_audit_file)
@@ -139,7 +138,9 @@ class Article:
     date_updated = ''
     agent = ''
     agency = ''
-    sold_on = ''
+    sale_date = ''
+    sale_price = ''
+    sold = ''
     def __init__(self, *args):
         try:
             self.address = args[0]
@@ -152,7 +153,9 @@ class Article:
             self.date_updated = args[7]
             self.agent = args[8]
             self.agency = args[9]
-            self.sold_on = ''  # Set through  parse_sold_article
+            self.sale_date = args[10]
+            self.sale_price = args[11]
+            self.sold = args[12]
         except IndexError:
             pass
             #print('Could not finish parsing article')

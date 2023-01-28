@@ -1,0 +1,180 @@
+27 Tarana Avenue|Glenroy|Stephen Boyle|Oak Park Real Estate - Oak Park|MAR-2022|$920k|1
+1/104 Widford Street|Glenroy|Halil Okur|Barry Plant - Glenroy|APR-2022|(price unknown)|1
+84 Evell Street|Glenroy|Tony Viggiano|Raine & Horne - Glenroy|APR-2022|(price unknown)|1
+1/3 Ila Street|Glenroy|Richard Imbesi|Stockdale & Leggo - Glenroy|MAR-2022|$830k|1
+87 John Street|Glenroy|||FEB-2022|$885k|1
+5/103 Plumpton Avenue|Glenroy||D&#x27;Aprano Real Estate Solutions Pty Ltd - Pascoe Vale|MAY-2022|$550k|1
+38 Fran Street|Glenroy|Tim Ilyas|Eview Group - C+M Residential|MAR-2022|$721k|1
+2/30 Wheatsheaf Road|Glenroy|Binod Shrestha|Sapphire Estate Agent Melbourne - GLENROY|Listed - not sold-Listed on4 Feb 2022-129days listed|Listed - not sold|0
+35 Farview Street|Glenroy|Richard Imbesi|Stockdale & Leggo - Glenroy|MAR-2022|$1.4m|1
+1/9 Kiama Street|Glenroy|Cody Bettanin|Nelson Alexander - Pascoe Vale|APR-2022|$680k|1
+1/13 Daley Street|Glenroy|Daniel Imbesi|Stockdale & Leggo - Glenroy|unknown|no_google_res|0
+868-870 Pascoe Vale Road|Glenroy|William Spyrou|Eview Group - C+M Residential|unknown|no_google_res|0
+204 West Street|Glenroy|Marwan Abdulwahed|Eview Group - C+M Residential|Listed - not sold-Listed on10 Feb 2022-147days listed|Listed - not sold|0
+1/22 Granville Street|Glenroy|Richard Imbesi|Stockdale & Leggo - Glenroy|APR-2022|$910k|1
+2/18 Salisbury Street|Glenroy|Chris Vallis|Barry Plant - Glenroy|MAR-2022|$691k|1
+6 Mitchell Court|Glenroy|Marco Sansoe|Barry Plant - Glenroy|MAR-2022|$750k|1
+6 Shepherd Street|Glenroy|Tim Harris|Boutique Estate Agents - Essendon|Listed - not sold-Listed on14 Feb 2022-190days listed|Listed - not sold|0
+1/117 John Street|Glenroy|Michael Chan|McGrath - Coburg/Brunswick|APR-2022|$640k|1
+32 Glenroy Road|Glenroy|Stephen Boyle|Oak Park Real Estate - Oak Park|MAR-2022|$990k|1
+2/117 John Street|Glenroy|Daniel Imbesi|Stockdale & Leggo - Glenroy|none|to_be_sold|0
+78 Belair Avenue|Glenroy|Richard Imbesi|Stockdale & Leggo - Glenroy|MAR-2022|$883k|1
+96 Widford Street|Glenroy|Alen Hewson|Iconek - LALOR|Listed - not sold-Listed on18 Feb 2022-24days listed|Listed - not sold|0
+2/27 Morley Street|Glenroy|Stafford Xavier|Oxbridge Prestige|AUG-2022|$605k|1
+89 John Street|Glenroy|||MAR-2022|$885k|1
+149 Glenroy Road|Glenroy|John Matthews|MATTHEWS. - ESSENDON|MAR-2022|$1.11m|1
+3/86 Hubert Avenue|Glenroy|Marco Sansoe|Barry Plant - Glenroy|MAR-2022|$560k|1
+2D Sunbeam Street|Glenroy|Roy Khoder|Barry Plant - Glenroy|MAR-2022|$790k|1
+2/16 Isla Avenue|Glenroy|Roy Khoder|Barry Plant - Glenroy|MAR-2022|$695k|1
+51 Farview Street|Glenroy|David Rubinic|Biggin & Scott - Inner North (Brunswick)|APR-2022|$1.9m|1
+7/54-56 Justin Avenue|Glenroy|Daniel Imbesi|Stockdale & Leggo - Glenroy|unknown_date|unknown_price|
+29 Coupling Way|Glenroy|Vince Carnevale|Ray White - Glenroy|unknown_date|unknown_price|
+4/32 Gladstone Parade|Glenroy|Vince Carnevale|Ray White - Glenroy|unknown_date|unknown_price|
+3/905 Pascoe Vale Road|Glenroy|David Taylor|YPA Glenroy - GLENROY|unknown_date|unknown_price|
+38 Melbourne Avenue|Glenroy|James McKay|Nelson Alexander - Pascoe Vale|unknown_date|unknown_price|
+25 May Street|Glenroy|Roy Khoder|Barry Plant - Glenroy|unknown_date|unknown_price|
+106 Cardinal Road|Glenroy|Peter Leahy|Peter Leahy Real Estate - COBURG|unknown_date|unknown_price|
+46 View Street|Glenroy|Luke Albioli|YPA Gladstone Park - GLADSTONE PARK|unknown_date|unknown_price|
+18 Ridgeway Avenue|Glenroy|Marc Romeo|Harcourts - Glenroy|unknown_date|unknown_price|
+4/9 Prospect Street|Glenroy|George Gimelli|Ray White  - Preston|unknown_date|unknown_price|
+5 Bourchier Street|Glenroy|Claudio Cuomo|Eview Group - C+M Residential|unknown_date|unknown_price|
+8 Sim Crescent|Glenroy|Roy Khoder|Barry Plant - Glenroy|unknown_date|unknown_price|
+3/39 Bindi Street|Glenroy|Marco Sansoe|Barry Plant - Glenroy|unknown_date|unknown_price|
+2/1 Chapman Avenue|Glenroy|Marco Sansoe|Barry Plant - Glenroy|unknown_date|unknown_price|
+2A Bindi Street|Glenroy|Claudio Cuomo|Eview Group - C+M Residential|unknown_date|unknown_price|
+75 Station Road|Glenroy|Duc Do|Create Real Estate - Sunshine|unknown_date|unknown_price|
+1/57 Outlook Drive|Glenroy|David Vaughan|Nelson Alexander - Pascoe Vale|unknown_date|unknown_price|
+1/31 Trevannion Street|Glenroy|Brian Mishra|Area Specialist - Melbourne|unknown_date|unknown_price|
+3 Kennedy Street|Glenroy|Roy Khoder|Barry Plant - Glenroy|unknown_date|unknown_price|
+3/100 Widford Street|Glenroy|Richard Ali|Barry Plant - Glenroy|unknown_date|unknown_price|
+2/1 Meadowbank Street|Glenroy|Ben Calcagno|Ray White - Gladstone Park|unknown_date|unknown_price|
+2/68 Glenroy Road|Glenroy|Daniel Imbesi|Stockdale & Leggo - Glenroy|unknown_date|unknown_price|
+5/1 Lindsay Street|Glenroy|Myles Johansson|Victoria Real Estate Agency - BRUNSWICK WEST|unknown_date|unknown_price|
+6/54 Acacia Street|Glenroy|Roy Khoder|Barry Plant - Glenroy|unknown_date|unknown_price|
+1/38 Maude Avenue|Glenroy|Roy Khoder|Barry Plant - Glenroy|unknown_date|unknown_price|
+1/25 Gladstone Parade|Glenroy|Spiros Karagiannidis|Nelson Alexander - Pascoe Vale|unknown_date|unknown_price|
+1/48 Hilda Street|Glenroy|Brian Mishra|Area Specialist - Melbourne|unknown_date|unknown_price|
+7/14 Salisbury Street|Glenroy|Mohammed El Hawli|YPA Glenroy - GLENROY|unknown_date|unknown_price|
+3/43 Belair Avenue|Glenroy|Ben Calcagno|Ray White - Gladstone Park|unknown_date|unknown_price|
+1/49 Isla Avenue|Glenroy|Shahid Ismail|ACE REAL ESTATE LAVERTON & POINT COOK - POINT COOK|unknown_date|unknown_price|
+2/19 Lytton Street|Glenroy|Richard Ali|Barry Plant - Glenroy|unknown_date|unknown_price|
+2/29 Gladstone Parade|Glenroy|Vince Carnevale|Ray White - Glenroy|unknown_date|unknown_price|
+77 Loongana Avenue|Glenroy|Sebastian Rello|Ray White - Glenroy|unknown_date|unknown_price|
+3/38 Widford Street|Glenroy|Sunny Walia|Stockdale & Leggo - Glenroy|unknown_date|unknown_price|
+95b Daley Street|Glenroy|Peter Forcone|Nelson Alexander - Pascoe Vale|unknown_date|unknown_price|
+2/19 Isla Avenue|Glenroy|Daniel Imbesi|Stockdale & Leggo - Glenroy|unknown_date|unknown_price|
+1/38 Daley Street|Glenroy|Claudio Cuomo|Eview Group - C+M Residential|unknown_date|unknown_price|
+324 Waterloo Road|Glenroy|Mario Pejovski|Four Pillars Real Estate|unknown_date|unknown_price|
+2/2 Langton Street|Glenroy|Dan Deltondo|Noel Jones - Mitcham|unknown_date|unknown_price|
+1/21 Morell Street|Glenroy|Matt Carver|Carver Real Estate - BRIGHTON|unknown_date|unknown_price|
+107 Tarana Avenue|Glenroy|Marco Sansoe|Barry Plant - Glenroy|unknown_date|unknown_price|
+2/45 Clovelly Avenue|Glenroy|Vittoria Campisi|YPA Caroline Springs - CAROLINE SPRINGS|unknown_date|unknown_price|
+2/6 Gordon Court|Glenroy|Marwan Abdulwahed|Eview Group - C+M Residential|unknown_date|unknown_price|
+3A Ash Court|Glenroy|Marco Sansoe|Barry Plant - Glenroy|unknown_date|unknown_price|
+1/60 Kennedy Street|Glenroy|Ali Celik|Harcourts - Hume|unknown_date|unknown_price|
+2/49 Melbourne Avenue|Glenroy|Richard Imbesi|Stockdale & Leggo - Glenroy|unknown_date|unknown_price|
+2/14 Newton Street|Glenroy|Anthony Monteleone|Jellis Craig - Brunswick|unknown_date|unknown_price|
+47 Maude Avenue|Glenroy|Marwan Abdulwahed|Eview Group - C+M Residential|unknown_date|unknown_price|
+25 - 27 Glen Street|Glenroy|Hitesh Parekh|National Brokers Network - NORTH MELBOURNE|unknown_date|unknown_price|
+21 Gordon Court|Glenroy|Sudip Neupane|Kathmandu Properties - North|unknown_date|unknown_price|
+3/33 Lytton Street|Glenroy|Richard Imbesi|Stockdale & Leggo - Glenroy|unknown_date|unknown_price|
+1/76 Bindi Street|Glenroy|Jay Alvat|Alvat & Bhandari Real Estate - Eview Group Member|unknown_date|unknown_price|
+Unit 7/11 Gladstone Pde|Glenroy|Manu Kumar|YPA Estate Agents Doreen - DOREEN|unknown_date|unknown_price|
+129 & 131 Daley St|Glenroy|Agent: Christine Cheung|Loyalventure Property - DOCKLANDS|unknown_date|unknown_price|
+58 Plumpton Avenue|Glenroy|Andrew D&#x27;Aprano|Nicole Gervasi Real Estate - MOONEE PONDS|unknown_date|unknown_price|
+1/21 Bourchier Street|Glenroy|Ben Calcagno|Ray White - Gladstone Park|unknown_date|unknown_price|
+11/2-6 Chapman Avenue|Glenroy|Sajjad Ahmad|City Real Estate|unknown_date|unknown_price|
+2/885-887 Pascoe Vale Road|Glenroy|Agent: Melita Dacruz|Keen Real Estate - BEACONSFIELD & YARRA VALLEY|unknown_date|unknown_price|
+4/101 Glenroy Road|Glenroy|Richard Imbesi|Stockdale & Leggo - Glenroy|unknown_date|unknown_price|
+1-3/48 Beatty Avenue|Glenroy|Marwan Abdulwahed|Eview Group - C+M Residential|unknown_date|unknown_price|
+3/71 Maude Avenue|Glenroy|Varinder Singh (VIK)|A One Real Estate - Melbourne|unknown_date|unknown_price|
+2/10 Caldwell Street|Glenroy|Daniel Imbesi|Stockdale & Leggo - Glenroy|unknown_date|unknown_price|
+2/12 Tarana Avenue|Glenroy|Claudio Cuomo|Eview Group - C+M Residential|unknown_date|unknown_price|
+3/8 Lytton Street|Glenroy|Frank Antonello|Leased and Sold Estate Agents - BRUNSWICK EAST|unknown_date|unknown_price|
+2/730 Pascoe Vale Road|Glenroy|Tim Ilyas|Eview Group - C+M Residential|unknown_date|unknown_price|
+3/28 Isla Avenue|Glenroy|Vince Casmi|Casmi Real Estate PTY LTD|unknown_date|unknown_price|
+73A Gowrie Street|Glenroy|Sam Abboud|Woodards - Ascot Vale|unknown_date|unknown_price|
+18 Lewis Street|Glenroy|Roy Khoder|Barry Plant - Glenroy|unknown_date|unknown_price|
+1&3/47 Augustine Terrace|Glenroy|David Taylor|YPA Glenroy - GLENROY|unknown_date|unknown_price|
+1/59-61 Isla Avenue|Glenroy|Marwan Abdulwahed|Eview Group - C+M Residential|unknown_date|unknown_price|
+2/96 Plumpton Avenue|Glenroy|Joe Ledda|hockingstuart - Preston|unknown_date|unknown_price|
+1/8 Murrell Street|Glenroy|William Spyrou|Eview Group - C+M Residential|unknown_date|unknown_price|
+50 Langton Street|Glenroy|Richard Imbesi|Stockdale & Leggo - Glenroy|unknown_date|unknown_price|
+1/12 Illawarra Street|Glenroy|Rebecca Towns|Brad Teal Woodards Pascoe Vale - PASCOE VALE|unknown_date|unknown_price|
+2/42 Pecham Street|Glenroy|William Spyrou|Eview Group - C+M Residential|unknown_date|unknown_price|
+1/2 Prospect Street|Glenroy|Claudio Cuomo|Eview Group - C+M Residential|unknown_date|unknown_price|
+5/26 Acacia Street|Glenroy|Vik Sodhi|Bombay Real Estate Mickleham, Wollert, Craigieburn - MICKLEHAM|unknown_date|unknown_price|
+2/13 Harold Street|Glenroy|Brad Carlin-Smith|The Hopkins Group - MELBOURNE|unknown_date|unknown_price|
+1A Valencia Street|Glenroy|Marco Sansoe|Barry Plant - Glenroy|unknown_date|unknown_price|
+9/6 Lytton Street|Glenroy|Myles Johansson|Victoria Real Estate Agency - BRUNSWICK WEST|unknown_date|unknown_price|
+3/22 York Street|Glenroy|Richard Imbesi|Stockdale & Leggo - Glenroy|unknown_date|unknown_price|
+4/4 Grandview Street|Glenroy|Agent: AE Gibson & Co|Professionals A E Gibson & Co - Glenroy|unknown_date|unknown_price|
+2/61 Maude Avenue|Glenroy|Agent: Peter Gibson|Professionals A E Gibson & Co - Glenroy|unknown_date|unknown_price|
+4/35 Lytton Street|Glenroy||Stockdale & Leggo - Glenroy|unknown_date|unknown_price|
+2-3/35 Lytton Street|Glenroy||Stockdale & Leggo - Glenroy|unknown_date|unknown_price|
+3/10 Howard Court|Glenroy|||unknown_date|unknown_price|
+5/13 Blair Street|Broadmeadows|Lem Djemal|Harcourts - Hume|unknown_date|unknown_price|
+89 Dimboola Road|Broadmeadows|Frank Romeo|Harcourts - Glenroy|unknown_date|unknown_price|
+10  Gosford Crescent|Broadmeadows|David Taylor|YPA Glenroy - GLENROY|unknown_date|unknown_price|
+1/36 Stanhope Street|Broadmeadows|Moe Al-Mnahi|SKAD REAL ESTATE - Craigieburn|unknown_date|unknown_price|
+21 Elliott Avenue|Broadmeadows|Val Micevski|Ray White - Reservoir|unknown_date|unknown_price|
+90 Kitchener Street|Broadmeadows|Marco Sansoe|Barry Plant - Glenroy|unknown_date|unknown_price|
+6/24 Fashion Parade|Broadmeadows|Marco Riggio|Hocking Stuart - Epping|unknown_date|unknown_price|
+8 Hamilton Street|Broadmeadows|Ali Celik|Harcourts - Hume|unknown_date|unknown_price|
+130  Ripplebrook Drive|Broadmeadows|David Taylor|YPA Glenroy - GLENROY|unknown_date|unknown_price|
+3/2 Blair Street|Broadmeadows|Mohammed El Hawli|YPA Glenroy - GLENROY|unknown_date|unknown_price|
+2/1 Dacelo Avenue|Broadmeadows|Raj Kapoor|Leader Real Estate Agency - MERNDA|unknown_date|unknown_price|
+2/3 Evans Court|Broadmeadows|Sam Misho|Professionals RCM - COOLAROO|unknown_date|unknown_price|
+96 Waranga Crescent|Broadmeadows|David Vaughan|Nelson Alexander - Pascoe Vale|unknown_date|unknown_price|
+2/16 Waranga Crescent|Broadmeadows|Richard Ali|Barry Plant - Glenroy|unknown_date|unknown_price|
+53 Waranga Crescent|Broadmeadows|Halil Okur|Barry Plant - Glenroy|unknown_date|unknown_price|
+1/280 Camp Road|Broadmeadows|Richard Ali|Barry Plant - Glenroy|unknown_date|unknown_price|
+2/11 Smiley Road|Broadmeadows|Richard Ali|Barry Plant - Glenroy|unknown_date|unknown_price|
+77 Waranga Crescent|Broadmeadows|Gulsum Okur|Barry Plant - Glenroy|unknown_date|unknown_price|
+15  Martell Street|Broadmeadows|David Taylor|YPA Glenroy - GLENROY|unknown_date|unknown_price|
+28 Bicknell Court|Broadmeadows|David Taylor|YPA Glenroy - GLENROY|unknown_date|unknown_price|
+77 Dimboola Road|Broadmeadows|Richard Ali|Barry Plant - Glenroy|unknown_date|unknown_price|
+1/18 Graham Street|Broadmeadows|Richard Ali|Barry Plant - Glenroy|unknown_date|unknown_price|
+1/9 Cuthbert Street|Broadmeadows|Sunny Bawa|Bombay Real Estate Mickleham, Wollert, Craigieburn - MICKLEHAM|unknown_date|unknown_price|
+6/3 Alexander Court|Broadmeadows|Amin Halabi|YPA Hume City|unknown_date|unknown_price|
+12a Ophir Street|Broadmeadows|Richard Ali|Barry Plant - Glenroy|unknown_date|unknown_price|
+1/149 Widford Street|Broadmeadows|Hoolya Roel|YPA Real Estate -  Reservoir|unknown_date|unknown_price|
+2  Bradley Street|Broadmeadows|David Taylor|YPA Glenroy - GLENROY|unknown_date|unknown_price|
+15  Hamilton Street|Broadmeadows|David Taylor|YPA Glenroy - GLENROY|unknown_date|unknown_price|
+1-3/62 Ophir Street|Broadmeadows|Ray Biner|Eview Group - Ray Biner Real Estate|unknown_date|unknown_price|
+27 Dunn Street|Broadmeadows|Arjun Chandaka|Ray White - Glenroy|MAR-2022|$716k|1
+3 Waverley Street|Broadmeadows|Inder Ghumman|SKAD REAL ESTATE - Craigieburn|JUN-2022|$450k|1
+62 Girgarre Street|Broadmeadows|Ursula Saba|Harcourts Coburg - COBURG|none|to_be_sold|0
+2/85 Lahinch Street|Broadmeadows|Moe Sayyah|Ray White - Coburg|APR-2022|$480k|1
+28-30 Gerbert Street|Broadmeadows|Marwan Abdulwahed|Eview Group - C+M Residential|unknown|no_google_res|0
+95 Camp Road|Broadmeadows|Richard Ali|Barry Plant - Glenroy|APR-2022|$645k|1
+3/325  Camp Road|Broadmeadows|David Taylor|YPA Glenroy - GLENROY|unknown|no_google_res|0
+1/289 Camp Road|Broadmeadows|Ali Celik|Harcourts - Hume|JUL-2022|$345k|1
+11 Cuthbert Street|Broadmeadows|Ali Celik|Harcourts - Hume|MAY-2022|$561k|1
+41A Ophir Street|Broadmeadows|Mohammed El Hawli|YPA Glenroy - GLENROY|MAR-2022|$595k|1
+21 Columbia Circuit|Broadmeadows|Abdel Al Bikai|YPA Craigieburn - CRAIGIEBURN|Listed - not sold-Listed on25 Jan 2022|Listed - not sold|0
+22 Ripplebrook Drive|Broadmeadows|Marco Sansoe|Barry Plant - Glenroy|MAR-2022|$610k|1
+23 Colin Court|Broadmeadows|Richard Ali|Barry Plant - Glenroy|APR-2022|$622k|1
+2/320 Camp Road|Broadmeadows|Agent: Shaun Marijanovic|Ray White - St Albans|Listed - not sold-Listed on10 Nov 2021-201days listed|Listed - not sold|0
+21  Gosford Crescent|Broadmeadows|David Taylor|YPA Glenroy - GLENROY|unknown|no_google_res|0
+2 Charlton Street|Broadmeadows|David Taylor|YPA Glenroy - GLENROY|Listed - not sold-Listed on24 Jan 2022-212days listed|Listed - not sold|0
+158 Widford Street|Broadmeadows||Ray Mascaro & Co Pty Ltd - Reservoir|MAY-2017|$550k|1
+35 Blair Street|Broadmeadows||Raine and Horne Dallas - DALLAS|Listed - not sold-Listed on9 Dec 2021-169days listed|Listed - not sold|0
+3 Elliot Avenue|Broadmeadows||Barry Plant - Glenroy|MAR-2021|$675k|1
+83  Graham Street|Broadmeadows||YPA Glenroy - GLENROY|unknown|no_google_res|0
+1/20 Graham Street|Broadmeadows||Eview Group - C+M Residential|MAR-2022|$407.5k|1
+77 Academy Drive|Broadmeadows||Professionals RCM - COOLAROO|Listed - not sold-Listed on29 Nov 2021-120days listed|Listed - not sold|0
+1,2&3/47 Cuthbert Street|Broadmeadows||YPA Glenroy - GLENROY|none|to_be_sold|0
+3/39 Gosford Crescent|Broadmeadows||Barry Plant - Glenroy|unknown_date|unknown_price|
+14 Nepean Street|Broadmeadows||Harcourts - Hume|MAY-2022|$690k|1
+7 Housden Street|Broadmeadows||Barry Plant - Glenroy|none|to_be_sold|0
+3/3 Alexander Court|Broadmeadows||YPA Craigieburn - CRAIGIEBURN|MAR-2022|$408k|1
+2&3/23 Stevenson Street|Broadmeadows||Eview Group - C+M Residential|unknown_date|unknown_price|
+11  Cooper Street|Broadmeadows||YPA Glenroy - GLENROY|unknown|no_google_res|0
+1-3/15  Heywood Crescent|Broadmeadows||YPA Glenroy - GLENROY|unknown|no_google_res|0
+20 Columbia Circuit|Broadmeadows||Di Battista Real Estate - CRAIGIEBURN|Listed - not sold-Listed on19 Nov 2021-207days listed|Listed - not sold|0
+1/8 Ortolan Avenue|Broadmeadows||YPA Craigieburn - CRAIGIEBURN|Listed - not sold-Listed on18 Nov 2021-146days listed|Listed - not sold|0
+40 Gosford Crescent|Broadmeadows||Barry Plant - Glenroy|APR-2022|$380k|1
+3/24 Congram Street|Broadmeadows||Harcourts - Hume|APR-2022|$390k|1
+4A Bittern Street|Broadmeadows||Harcourts - Hume|unknown_date|unknown_price|0
+50 Ophir Street|Broadmeadows||Rickdale Real Estate - MOONEE PONDS|unknown_date|unknown_price|
