@@ -15,3 +15,9 @@ geckodriver*
 pyvenv.cfg
 
 __pycache__
+node_modules/
+/test-results/
+/playwright-report/
+/playwright/.cache/
+*.ods
+*.ods#
