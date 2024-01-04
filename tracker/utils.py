@@ -8,5 +8,6 @@ class Utils:
     def __init__(self, driver):
         self.driver = driver
 
-    def wait(self, xpath):
-        WebDriverWait(self.driver, 5).until(ec.visibility_of_element_located((By.XPATH, xpath)))
+    def wait(self, locator, by=By.XPATH):
+        WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((by, locator)))
+    

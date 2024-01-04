@@ -4,13 +4,10 @@ import sys
 import json
 import shutil
 import time
-from datetime import datetime
+from datetime import datetime, date
 from tracker.rea_parser import ReaParser, backup_file
 
-# TODO: Run as a webapp
-# TODO: Load sold pages in and check what price it sold for vs what it listed
-# TODO: Find out which places sold
-
+# Need to set PYPATH first : $env:PYTHONPATH="D:\Coding\real_estate_tracker"
 
 buy_pages = 'D:/Coding/real_estate_tracker/pages/buy/'
 sold_pages = 'D:/Coding/real_estate_tracker/pages/sold/'
@@ -23,14 +20,15 @@ sold_audit = f'{output}sold_audit.txt'
 main_buy_record = ReaParser()
 new_page = ReaParser()
 
-# Backup pages:
-backup_file(buy_main)
-backup_file(buy_audit)
-
+try:
+    with open('./latest.txt', 'r') as latest:
+        print('Last run date : '+latest.read())
+except:
+    pass
 
 # If existing file exists, read in and store
 try:
-    main_buy_record.get_from_csv(buy_main, buy_audit)
+    main_buy_record.load_from_csv(buy_main, buy_audit)
 except FileNotFoundError:
     print('Could not find main buy record')
     main_buy_record = None
@@ -44,7 +42,7 @@ if main_buy_record is None:
         print('Starter file : ')
         print(starter_file)
         main_buy_record = ReaParser()
-        main_buy_record.parse_buy_page(starter_file)
+        main_buy_record.parse_rea_buy_page(starter_file)
         with open(buy_main, 'w', newline='') as csvfile:
             rea_writer = csv.writer(csvfile, delimiter='|')
             rea_writer.writerow(['Address', 'Suburb', 'Price', 'Bedrooms', 'Bathrooms', 'Size', 'Auction', 'Date updated', 'Agent', 'Agency'])
@@ -67,23 +65,16 @@ to_be_processed = ReaParser.get_files_in_dir(buy_pages)
 print('Files to process:')
 print(to_be_processed)
 
-#strathmore = 'D:/Coding/real_estate_tracker/pages/buy/processed/strathmore1-processed.htm'
-#strathmorefile = ReaParser()
-#strathmorefile.parse_buy_page(strathmore)
-
-# Load in agent info backdated.
-
-#procs = 'D:/Coding/real_estate_tracker/pages/buy/processed/'
-#agent_details = ReaParser.get_files_in_dir(procs)
-#for agent_file in agent_details:
-#    file_path = procs+agent_file
-#    new_file = ReaParser()
-#    with open(file_path, 'r', encoding='utf-8') as f:
-#        content = f.read()
-#        if '89 John Street' in content :
-#            print('89 John Street')
-#    new_file.parse_buy_page(file_path)
-#    main_buy_record.add_agent_details(new_file)
+if(len(to_be_processed) > 0):
+    # Backup pages:
+    print('Backup files')
+    backup_file(buy_main)
+    backup_file(buy_audit)
+    # Update last run time
+    current = datetime.now().strftime("%d/%m/%Y")
+    print('Current date : ' + current)
+    with open('./latest.txt', 'w') as latestfile:
+        latestfile.write(current)
 
 # Compare new file against old records and see if there is a change. Set file to processed afterwards.
 for file in to_be_processed:
@@ -91,7 +82,10 @@ for file in to_be_processed:
     print(file)
     file_path = buy_pages+file
     new_file = ReaParser()
-    new_file.parse_buy_page(file_path)
+    if 'dom' in file:
+        new_file.parse_domain_buy_page(file_path)
+    else:
+        new_file.parse_rea_buy_page(file_path)
     if len(new_file.articles) == 0:
         print('No articles from the file ' + file_path)
     main_buy_record.merge(new_file)
@@ -113,21 +107,4 @@ with open(buy_audit, 'w', newline='') as jsonaudit:
 
 
 
-# *** Sold processing ***
 
-# Get all pages in sold and put them into a list
-# Then write out that list to the disk
-# Then Load up the buy_main and see if a sold record exists for a buy. If it does, match the 2 together and save them.
-# Write out the properties that sold and for what price.
-'''
-main_sold_record = ReaParser()
-try:
-    main_sold_record.get_from_csv(sold_main, sold_audit)
-except:
-    main_sold_record = None
-
-if main_sold_record is None:
-    main_buy_record
-
-
-'''

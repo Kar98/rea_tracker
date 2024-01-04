@@ -21,3 +21,7 @@ node_modules/
 /playwright/.cache/
 *.ods
 *.ods#
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

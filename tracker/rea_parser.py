@@ -2,6 +2,7 @@ import re
 import json
 import os
 import time
+import typing
 import shutil
 from datetime import date
 
@@ -14,7 +15,7 @@ class ReaParser:
         self.audit = None
         self.date = ''
 
-    def parse_buy_page(self, path):
+    def parse_rea_buy_page(self, path):
         """Parses saved html into list of articles"""
         with open(path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -29,21 +30,56 @@ class ReaParser:
             self.date = ''
             print('Could not get file date metadata')
 
-        if('27 Tarana Avenue' in content):
-            print('')
         matches = re.findall('<article(.*?)</article>', content)
         for match in matches:
             # Filter out the rubbish mini ads that RE put in between the main cards.
             if 'Card__Box' in match and 'residential-card' in match:
                 try:
-                    self.articles.append(Article().parse_article(match, self.date))
+                    self.articles.append(Article().parse_rea_article(match, self.date))
                 except IndexError:
                     print('Error parsing article.')
                     print(match)
 
         return self.articles
+    
+    def parse_domain_buy_page(self, path):
+        """Parses a domain page into a list of articles"""
+        with open(path, 'r', encoding='utf-8') as f:
+            content = f.read()
 
-    def get_from_csv(self, path_to_csv, load_audit_file=''):
+        if content == '':
+            raise RuntimeError('File not found')
+
+        try:
+            file_time2 = int(os.path.getmtime(path))
+            self.date = time.strftime('%d/%m/%Y', time.localtime(file_time2))
+        except OSError:
+            self.date = ''
+            print('Could not get file date metadata')
+        
+        results = re.search('data-testid="results(.*?)</ul>', content, re.DOTALL).group(1)
+
+        # types of cards displayed on the page
+        matches = re.findall('<div data-testid="listing-card-wrapper-standard"(.*?)</li>', results)
+        matches2 = re.findall('<div data-testid="listing-card-wrapper-elite"(.*?)</li>', results)
+        matches3 = re.findall('<div data-testid="listing-card-wrapper-elitepp"(.*?)</li>', results)
+        matches4 = re.findall('<div data-testid="listing-card-wrapper-standardpp"(.*?)</li>', results)
+        matches5 = re.findall('<div data-testid="listing-card-wrapper-premiumplus"(.*?)</li>', results)
+        matches += matches2
+        matches += matches3
+        matches += matches4
+        matches += matches5
+
+        for match in matches:
+            try:
+                self.articles.append(Article().parse_domain_article(match, self.date))
+            except IndexError:
+                print('Error parsing article.')
+                print(match)
+
+        return self.articles
+
+    def load_from_csv(self, path_to_csv, load_audit_file=''):
         with open(path_to_csv, 'r') as f:
             lines = f.readlines()
             for line in lines:
@@ -71,21 +107,23 @@ class ReaParser:
                 if main_article.address == merge_article.address and main_article.suburb == merge_article.suburb:
                     found = True
                     if main_article.price != merge_article.price:
+                        if len(merge_article.price) <= 1:
+                            # If a house is listed as contact agent then RE will show as blank
+                            merge_article.price = 'blank'
                         # if audit record already exists, then add to audit and update main with latest price version
                         key_name = f'{main_article.address},{main_article.suburb}'
                         check_record = self.__is_audit(key_name)
                         print(f'Difference detected for {key_name} ')
-                        print(f'Old price {main_article.price} . New price {merge_article.price}')
+                        print(f'Old price "{main_article.price}" . New price "{merge_article.price}"')
                         if check_record is not None:
                             # Edit
                             self.__edit_audit(key_name, merge_article.price, merge_article.date_updated)
-                            # Update the main record
-                            self.__edit_article(main_article, merge_article)
                         else:
                             # Append
                             self.audit.append({'Address': key_name, 'Prices': [{"Price": main_article.price, "Date": main_article.date_updated},
                                                                                {"Price": merge_article.price, "Date": merge_article.date_updated}]})
-                            self.__edit_article(main_article, merge_article)
+                        # Update the main record
+                        self.__edit_article(main_article, merge_article)
             if not found:
                 print(f'New listing : {merge_article.address},{merge_article.suburb}')
                 self.articles.append(merge_article)
@@ -145,7 +183,10 @@ class Article:
         try:
             self.address = args[0]
             self.suburb = args[1]
-            self.price = args[2]
+            if args[2] == 'blank':
+                self.price = ''
+            else:
+                self.price = args[2]
             self.bedrooms = args[3]
             self.bathrooms = args[4]
             self.landsize = args[5]
@@ -164,9 +205,9 @@ class Article:
         return f' {self.address} {self.price} {self.bedrooms}/{self.bathrooms} . Size: {self.landsize} Auction: {self.auction}'
 
     def to_csv(self):
-        return [self.address,self.suburb, self.price,self.bedrooms,self.bathrooms,self.landsize,self.auction,self.date_updated,self.agent,self.agency]
+        return [self.address,self.suburb, self.price,self.bedrooms,self.bathrooms,self.landsize,self.auction,self.date_updated,self.agent,self.agency, self.sale_date, self.sale_price, self.sold]
 
-    def parse_article(self, content, date_updated=''):
+    def parse_rea_article(self, content, date_updated=''):
         
         x_address = 'card__details-link"><span class="">(.*?)<'
         x_agent = 'agent__name.*?>(.*?)<'
@@ -200,7 +241,39 @@ class Article:
         self.agency = self.__get_value(content, x_agency).replace('\n','')
 
         # Only applicable for sold pages:
-        self.sold_on = self.__get_value(content, x_sold_on)
+        self.sale_date = self.__get_value(content, x_sold_on)
+
+        return self
+    
+    def parse_domain_article(self, content, date_updated=''):
+        x_address = 'address-line1".*?>(.*?),'
+        x_suburb = 'address-line2".*?><span>(.*?)<'
+        x_price = 'listing-card-price".*?>(.*?)<'
+        x_feature = 'property-features-text-container".*?>(.*?)<'
+        
+        self.address = self.__get_value(content, x_address)
+        self.suburb = self.__get_value(content, x_suburb).title()
+        self.price = self.__get_value(content, x_price).strip()
+        features = re.findall(x_feature, content)
+        if len(features) == 1:
+            # vacant land
+            self.landsize = features[0]
+            self.bedrooms = ''
+            self.bathrooms = ''
+        else:
+            self.bedrooms = features[0]
+            self.bathrooms = features[1]
+
+        if len(features) == 4:
+            self.landsize = features[3]
+        
+        self.auction = ''
+        if date_updated == '':
+            self.date_updated = date.today().strftime('%d/%m/%Y')
+        else:
+            self.date_updated = date_updated
+        self.agent = ''
+        self.agency = ''
 
         return self
 
@@ -218,6 +291,9 @@ class Article:
         try:
             value = re.search(regexp, content).group(1).replace('|', '')
             value = value.replace('&amp;','&')
+            value = value.replace('&nbsp;',' ')
+            if '<' in value:
+                value = value.replace('<!-- -->', '')
             return value
         except AttributeError:
             return ''
