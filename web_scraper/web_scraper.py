@@ -1,32 +1,36 @@
 import sys
+from datetime import datetime
+debug = False
 if __name__ == "__main__":
     sys.path.append("D:\\Coding\\real_estate_tracker")
-    print(sys.path)
-# from lib2to3.pgen2 import driver
-import os
-import os.path
-import json
-import io
+
+if debug == False:
+    with open(f'./latest.txt', 'r') as fread:
+        content = fread.readline()
+        if datetime.now().strftime("%d/%m/%Y") == content:
+            print(f'Already run for {content}')
+            sys.exit()
+
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-# from selenium.webdriver.chrome.webdriver import WebDriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.chrome.options import Options
 from tracker.utils import Utils
 CSS = By.CSS_SELECTOR
 XPATH = By.XPATH
 driver_path = 'D:\\Coding\\real_estate_tracker\\drivers\\chromedriver.exe'
 sys.path.append(driver_path)
-
-d = webdriver.Chrome(executable_path="D:\\Coding\\real_estate_tracker\\drivers\\chromedriver.exe")
+options = Options()
+if debug == False:
+    options.add_argument("--headless=new")
+d = webdriver.Chrome(options=options, executable_path="D:\\Coding\\real_estate_tracker\\drivers\\chromedriver.exe")
 utils = Utils(d)
 
 def type(text):
     for key in text:
         input.send_keys(key)
-        time.sleep(0.5)
+        time.sleep(0.4)
 
 
 def click(locator, nth=0):
@@ -35,7 +39,12 @@ def click(locator, nth=0):
     else:
         by = By.CSS_SELECTOR
     utils.wait(locator, by)
-    d.find_elements(by, locator)[nth].click()
+    try:
+        d.find_elements(by, locator)[nth].click()
+    except:
+        print(f'Could not click element {locator}')
+        d.get_screenshot_as_file('./err.png')
+        raise Exception(f'Could not click element {locator}')
 
 def search_google(text):
     q = "[title=Search]"
@@ -76,14 +85,18 @@ type('glenroy')
 input.send_keys(Keys.ENTER)
 # Click filters and remove popup
 click(filters)
+time.sleep(1)
 click(clear_filter, 1)
 time.sleep(1)
 click(nearby)
+time.sleep(1)
 count = len(d.find_elements(XPATH, search_btn))
 d.find_elements(XPATH, search_btn)[count-2].click()
-# click(search_btn, 3)
+time.sleep(1)
 click(featured)
+time.sleep(1)
 click(dropdown)
+time.sleep(3)
 # Start main loop
 filenum = 1
 while True:

@@ -102,6 +102,9 @@ class ReaParser:
         if self.audit is None:
             raise RuntimeError('No audit record set for the main ReaParser object')
         for merge_article in parser_to_merge.articles:
+            if merge_article.address == "" or merge_article.address == "Address available on request":
+                print('Skipped blank address')
+                continue
             found = False
             for main_article in self.articles:
                 if main_article.address == merge_article.address and main_article.suburb == merge_article.suburb:
@@ -252,7 +255,10 @@ class Article:
         x_feature = 'property-features-text-container".*?>(.*?)<'
         
         self.address = self.__get_value(content, x_address)
-        self.suburb = self.__get_value(content, x_suburb).title()
+        if self.address == "":
+            self.suburb = ""
+        else:
+            self.suburb = self.__get_value(content, x_suburb).title()
         self.price = self.__get_value(content, x_price).strip()
         features = re.findall(x_feature, content)
         if len(features) == 1:

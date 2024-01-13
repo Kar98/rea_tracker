@@ -42,7 +42,10 @@ if main_buy_record is None:
         print('Starter file : ')
         print(starter_file)
         main_buy_record = ReaParser()
-        main_buy_record.parse_rea_buy_page(starter_file)
+        if 'dom' in starter_file:
+            main_buy_record.parse_domain_buy_page(starter_file)
+        else:
+            main_buy_record.parse_rea_buy_page(starter_file)
         with open(buy_main, 'w', newline='') as csvfile:
             rea_writer = csv.writer(csvfile, delimiter='|')
             rea_writer.writerow(['Address', 'Suburb', 'Price', 'Bedrooms', 'Bathrooms', 'Size', 'Auction', 'Date updated', 'Agent', 'Agency'])
