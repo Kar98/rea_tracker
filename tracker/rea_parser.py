@@ -128,7 +128,7 @@ class ReaParser:
                         # Update the main record
                         self.__edit_article(main_article, merge_article)
             if not found:
-                print(f'New listing : {merge_article.address},{merge_article.suburb}')
+                print(f'New listing : {merge_article.address},{merge_article.suburb} {merge_article.price}')
                 self.articles.append(merge_article)
     
     def add_agent_details(self, parser_to_merge):

@@ -23,6 +23,7 @@ driver_path = 'D:\\Coding\\real_estate_tracker\\drivers\\chromedriver.exe'
 sys.path.append(driver_path)
 options = Options()
 if debug == False:
+    # pass
     options.add_argument("--headless=new")
 d = webdriver.Chrome(options=options, executable_path="D:\\Coding\\real_estate_tracker\\drivers\\chromedriver.exe")
 utils = Utils(d)
@@ -103,6 +104,7 @@ while True:
     with open(f'./pages/buy/dom-g{filenum}.html', 'w', encoding='utf-8') as fwrite:
         source = d.find_element(CSS, "[data-testid='page']").get_attribute('outerHTML')
         fwrite.write(source)
+        print(f'Wrote file dom-g{filenum}.html')
     if d.find_elements(CSS, paginator)[1].get_dom_attribute('disabled') is not None:
         break
     click(paginator, 1)
