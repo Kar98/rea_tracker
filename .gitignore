@@ -26,6 +26,7 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 latest.txt
+main.log
 
 # random files
 interesting.txt

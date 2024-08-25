@@ -7,7 +7,7 @@ import time
 from datetime import datetime, date
 from tracker.rea_parser import ReaParser, backup_file
 import logging
-logger = logging.getLogger("REA")
+logger = logging.getLogger("main")
 logging.basicConfig(filename='main.log', level=logging.INFO)
 
 # Need to set PYPATH first : $env:PYTHONPATH="D:\Coding\real_estate_tracker"
@@ -20,13 +20,14 @@ sold_main = f'{output}sold_main.txt'
 buy_audit = f'{output}buy_audit.txt'
 sold_audit = f'{output}sold_audit.txt'
 
-main_buy_record = ReaParser()
-new_page = ReaParser()
+main_buy_record = ReaParser(logger)
+new_page = ReaParser(logger)
 
 try:
     with open('./latest.txt', 'r') as latest:
-        logger.info('Last run date : '+latest.read())
-        print('Last run date : '+latest.read())
+        rundate = latest.read()
+        logger.info('Last run date : '+rundate)
+        print('Last run date : '+rundate)
 except:
     pass
 
@@ -45,7 +46,7 @@ if main_buy_record is None:
         starter_file = os.path.join(buy_pages, to_be_processed[0])
         print('Starter file : ')
         print(starter_file)
-        main_buy_record = ReaParser()
+        main_buy_record = ReaParser(logger)
         if 'dom' in starter_file:
             main_buy_record.parse_domain_buy_page(starter_file)
         else:
@@ -89,7 +90,7 @@ for file in to_be_processed:
     print(file)
     logger.info('Processing file '+ file)
     file_path = buy_pages+file
-    new_file = ReaParser()
+    new_file = ReaParser(logger)
     if 'dom' in file:
         new_file.parse_domain_buy_page(file_path)
     else:
