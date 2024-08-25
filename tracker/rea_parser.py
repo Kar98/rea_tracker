@@ -5,15 +5,17 @@ import time
 import typing
 import shutil
 from datetime import date
+import logging
 
 
 class ReaParser:
     article_regexp = '<article(.*?)</article>'
 
-    def __init__(self):
+    def __init__(self, logger: logging.Logger):
         self.articles = []
         self.audit = None
         self.date = ''
+        self.log = logger
 
     def parse_rea_buy_page(self, path):
         """Parses saved html into list of articles"""
@@ -37,6 +39,7 @@ class ReaParser:
                 try:
                     self.articles.append(Article().parse_rea_article(match, self.date))
                 except IndexError:
+                    self.log.error(match)
                     print('Error parsing article.')
                     print(match)
 
@@ -75,6 +78,7 @@ class ReaParser:
                 self.articles.append(Article().parse_domain_article(match, self.date))
             except IndexError:
                 print('Error parsing article.')
+                self.log.error(match)
                 print(match)
 
         return self.articles
@@ -103,6 +107,7 @@ class ReaParser:
             raise RuntimeError('No audit record set for the main ReaParser object')
         for merge_article in parser_to_merge.articles:
             if merge_article.address == "" or merge_article.address == "Address available on request":
+                self.log.info('Skipped blank address')
                 print('Skipped blank address')
                 continue
             found = False
@@ -118,6 +123,8 @@ class ReaParser:
                         check_record = self.__is_audit(key_name)
                         print(f'Difference detected for {key_name} ')
                         print(f'Old price "{main_article.price}" . New price "{merge_article.price}"')
+                        self.log.info(f'Difference detected for {key_name} ')
+                        self.log.info(f'Old price "{main_article.price}" . New price "{merge_article.price}"')
                         if check_record is not None:
                             # Edit
                             self.__edit_audit(key_name, merge_article.price, merge_article.date_updated)
@@ -129,6 +136,7 @@ class ReaParser:
                         self.__edit_article(main_article, merge_article)
             if not found:
                 print(f'New listing : {merge_article.address},{merge_article.suburb} {merge_article.price}')
+                self.log.info(f'New listing : {merge_article.address},{merge_article.suburb} {merge_article.price}')
                 self.articles.append(merge_article)
     
     def add_agent_details(self, parser_to_merge):
@@ -314,10 +322,8 @@ def backup_file(file_path):
     if os.path.exists(file_path):
         original_backup_filepath = f'{filedir}/backups/{filename}'
         if os.path.exists(original_backup_filepath):
-            if '.csv' in original_backup_filepath:
-                os.rename(original_backup_filepath, original_backup_filepath.replace('.csv','-'+str(int(time.time()))+'.csv'))
-            elif '.txt' in original_backup_filepath:
-                os.rename(original_backup_filepath, original_backup_filepath.replace('.txt', '-' + str(int(time.time())) + '.txt'))
+            if '.txt' in original_backup_filepath:
+                os.rename(original_backup_filepath, original_backup_filepath.replace('.txt','-'+str(int(time.time()))+'.txt'))
             shutil.copy(file_path, original_backup_filepath)
 
     # Replace with new one

@@ -5,7 +5,7 @@ from tracker.rea_parser import ReaParser, backup_file
 # This will merge the sold_main.txt into buy_main.txt.
 # Run as a once off job if the get_sold.py fails.
 output = 'D:/Coding/real_estate_tracker/output/'
-buy_main = f'{output}buy_main.csv'
+buy_main = f'{output}buy_main.txt'
 sold_main = f'{output}sold_main.txt'
 buy_audit = f'{output}buy_audit.txt'
 

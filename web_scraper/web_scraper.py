@@ -71,6 +71,7 @@ nearby = "//div[text()='Search nearby suburbs']"
 featured = "[data-testid='sort-by-section'] [role=combobox]"
 dropdown = "#search-results-sort-by-filter-item-1"
 paginator = "[data-testid='paginator-navigation-button']"
+mainheader = "[data-testid=summary]"
 # Navigate
 search_google('domain')
 utils.wait('//h3')
@@ -100,6 +101,11 @@ click(dropdown)
 time.sleep(3)
 # Start main loop
 filenum = 1
+time.sleep(3)
+if('Glenroy' not in d.find_element(CSS, mainheader).text):
+    print('Glenroy not found')
+    d.close()
+
 while True:
     with open(f'./pages/buy/dom-g{filenum}.html', 'w', encoding='utf-8') as fwrite:
         source = d.find_element(CSS, "[data-testid='page']").get_attribute('outerHTML')

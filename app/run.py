@@ -6,14 +6,17 @@ import shutil
 import time
 from datetime import datetime, date
 from tracker.rea_parser import ReaParser, backup_file
+import logging
+logger = logging.getLogger("REA")
+logging.basicConfig(filename='main.log', level=logging.INFO)
 
 # Need to set PYPATH first : $env:PYTHONPATH="D:\Coding\real_estate_tracker"
 
 buy_pages = 'D:/Coding/real_estate_tracker/pages/buy/'
 sold_pages = 'D:/Coding/real_estate_tracker/pages/sold/'
 output = 'D:/Coding/real_estate_tracker/output/'
-buy_main = f'{output}buy_main.csv'
-sold_main = f'{output}sold_main.csv'
+buy_main = f'{output}buy_main.txt'
+sold_main = f'{output}sold_main.txt'
 buy_audit = f'{output}buy_audit.txt'
 sold_audit = f'{output}sold_audit.txt'
 
@@ -22,6 +25,7 @@ new_page = ReaParser()
 
 try:
     with open('./latest.txt', 'r') as latest:
+        logger.info('Last run date : '+latest.read())
         print('Last run date : '+latest.read())
 except:
     pass
@@ -83,6 +87,7 @@ if(len(to_be_processed) > 0):
 for file in to_be_processed:
     print('Processing file')
     print(file)
+    logger.info('Processing file '+ file)
     file_path = buy_pages+file
     new_file = ReaParser()
     if 'dom' in file:

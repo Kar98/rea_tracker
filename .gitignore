@@ -4,7 +4,7 @@ drivers/
 Scripts/
 output/backups/*
 output/*.txt
-output/*.csv
+output/*.txt
 Lib/
 pages/buy/*.htm
 pages/buy/*.html
@@ -26,3 +26,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 latest.txt
+
+# random files
+interesting.txt

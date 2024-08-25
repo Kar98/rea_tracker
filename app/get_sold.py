@@ -22,7 +22,7 @@ d.set_page_load_timeout(10)
 
 # Grab list of properties to search for
 output = 'D:/Coding/real_estate_tracker/output/'
-buy_main = f'{output}buy_main.csv'
+buy_main = f'{output}buy_main.txt'
 buy_audit = f'{output}buy_audit.txt'
 sold_main = f'{output}sold_main.txt'
 error_file = './output/errors.txt'

@@ -1,7 +1,7 @@
 from tracker.rea_parser import ReaParser, backup_file
 from os.path import abspath
 output = 'D:/Coding/real_estate_tracker/output/'
-buy_main = f'{output}buy_main.csv'
+buy_main = f'{output}buy_main.txt'
 buy_audit = f'{output}buy_audit.txt'
 sold_main = f'{output}sold_main.txt'
 
