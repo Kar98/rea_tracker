@@ -107,8 +107,6 @@ class ReaParser:
             raise RuntimeError('No audit record set for the main ReaParser object')
         for merge_article in parser_to_merge.articles:
             if merge_article.address == "" or merge_article.address == "Address available on request":
-                self.log.info('Skipped blank address')
-                print('Skipped blank address')
                 continue
             found = False
             for main_article in self.articles:
